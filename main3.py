@@ -31,7 +31,7 @@ MAG_ADDRESS = 0x13
 ACC_REGISTER_ADDRESS = 0x02
 MAG_REGISTER_ADDRESS = 0x42
 # ゴール座標
-TARGET_LAT = 33.890006666666665   # 緯度
+TARGET_LAT = 33.890006666666665  # 緯度
 TARGET_LON = 130.83991666666665  # 経度
 # モーター設定
 left_motor = Motor(forward=12, backward=18)
@@ -187,9 +187,8 @@ def calculate_bearing(current_lat, current_lon, target_lat, target_lon):
     y = math.cos(lat1) * math.sin(lat2) - (
         math.sin(lat1) * math.cos(lat2) * math.cos(diff_lon)
     )
-    initial_bearing = math.atan2(x, y) * (180 / math.pi)
-    compass_bearing = (initial_bearing) % 360
-    compass_bearing = (initial_bearing + 360) % 360
+    initial_bearing = math.atan2(y, x) * (180 / math.pi)
+    compass_bearing = (initial_bearing - 90) % 360
     logging.info(f"compass_bearing = {compass_bearing}")
     return compass_bearing
 
@@ -396,8 +395,7 @@ def get_image_bounds(image_path):
     }
 
 
-
-#def get_image_bounds(image_path):
+# def get_image_bounds(image_path):
 #   """衛星画像の境界座標を返す"""
 #   return {
 #       "left": 130.8384075,
@@ -455,7 +453,9 @@ def create_map(coordinates, background_image_path):
         ax.yaxis.set_major_formatter(ScalarFormatter(useOffset=False))
         plt.title("GPS Route on Satellite Image")
         plt.savefig(
-            "/home/Keito1091/cansat_route_with_background.png", dpi=300, bbox_inches="tight"
+            "/home/Keito1091/cansat_route_with_background.png",
+            dpi=300,
+            bbox_inches="tight",
         )
         plt.close()
 
