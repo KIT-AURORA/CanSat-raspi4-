@@ -200,9 +200,8 @@ def calculate_bearing(current_lat, current_lon, target_lat, target_lon):
     y = math.cos(lat1) * math.sin(lat2) - (
         math.sin(lat1) * math.cos(lat2) * math.cos(diff_lon)
     )
-    initial_bearing = math.atan2(x, y) * (180 / math.pi)
-    compass_bearing = (initial_bearing) % 360
-    compass_bearing = (initial_bearing + 360) % 360
+    initial_bearing = math.atan2(y, x) * (180 / math.pi)
+    compass_bearing = (initial_bearing - 90) % 360
     logging.info(f"compass_bearing = {compass_bearing}")
     return compass_bearing
 
