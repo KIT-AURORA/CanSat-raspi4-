@@ -19,6 +19,7 @@ from matplotlib.ticker import ScalarFormatter
 import logging
 
 # ！！！！！！！！！！！！直前に確認！！！！！！！！！！！
+# 本番前　ログを削除（rm Navigartion.log）
 # ゴール座標
 TARGET_LAT = 33.890006666666665  # 緯度
 TARGET_LON = 130.83991666666665  # 経度
@@ -323,11 +324,12 @@ def gps_navigartion():
             print(error)
             current_time = time.time()
             if current_time - last_log_time >= 1:
-                last_log_time = current_time()
                 logging.info(f"current_heading = {current_heading}")
                 logging.info(f"target_bearing = {target_bearing}")
                 logging.info(f"left_speed = {left_speed}")
                 logging.info(f"right_speed = {right_speed}")
+                last_log_time = current_time()
+
             control_motors(target_bearing, current_heading)
             time.sleep(0.1)
     except KeyboardInterrupt:
