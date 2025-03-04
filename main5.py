@@ -507,6 +507,8 @@ def separation():
     stable_time = 5  # 静止時間
     while True:
         acc_x, acc_y, acc_z = get_bmx055_accel_data()
+        if acc_x is None or acc_y is None or acc_z is None:
+            continue
         acc = calculate_acc(acc_x, acc_y, acc_z)
         print(acc)
         if -0.5 < acc < 0.5:
