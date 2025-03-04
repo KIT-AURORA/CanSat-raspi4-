@@ -296,6 +296,8 @@ def gps_navigartion():
             current_lat, current_lon = get_gps()
             if current_lat is None or current_lon is None:
                 continue
+            if current_lat == 0 and current_lon == 0:
+                continue
 
             distance_to_target = geodesic(
                 (current_lat, current_lon), (TARGET_LAT, TARGET_LON)
@@ -328,7 +330,7 @@ def gps_navigartion():
                 logging.info(f"target_bearing = {target_bearing}")
                 logging.info(f"left_speed = {left_speed}")
                 logging.info(f"right_speed = {right_speed}")
-                last_log_time = current_time()
+                last_log_time = current_time
 
             control_motors(target_bearing, current_heading)
             time.sleep(0.1)
@@ -349,6 +351,7 @@ def image_navigartion():
                 left_motor.stop()
                 logging.info("Arrival. Stop")
                 print("ターゲット到着, 停止します")
+                goalsound()
                 break
             image = camera.capture_array()
             hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
@@ -402,6 +405,7 @@ def image_navigartion():
                     left_motor.stop()
                     logging.info("Arrival. Stop.")
                     print("ターゲット到着, 停止します")
+                    goalsound()
                     break
             else:
                 right_motor.backward(0.4)
@@ -454,8 +458,7 @@ def create_map(coordinates, background_image_path):
         gdf_line = gpd.GeoDataFrame(geometry=[line], crs="EPSG:4326")
 
         img = mpimg.imread(background_image_path)
-        bounds = get_image_bounds(background_image_path)
-
+        bounds = get_image_bounds(map_number)
         fig, ax = plt.subplots(figsize=(10, 6))
         ax.imshow(
             img,
@@ -519,6 +522,55 @@ def separation():
     set_angle(5)  # 解除
     logging.info("comleted separation. start navigation.")
     print("分離完了。走行開始")
+
+
+def goalsound():
+    pin = 16
+    GPIO.setup(pin, GPIO.OUT, initial=GPIO.LOW)
+
+    p = GPIO.PWM(pin, 1)
+    p.start(50)
+
+    p.ChangeFrequency(698)
+    time.sleep(0.15)
+    p.stop()
+    time.sleep(0.05)
+    p.start(50)
+    p.ChangeFrequency(698)
+    time.sleep(0.15)
+    p.stop()
+    time.sleep(0.05)
+    p.start(50)
+    p.ChangeFrequency(698)
+    time.sleep(0.15)
+    p.stop()
+    time.sleep(0.05)
+    p.start(50)
+    p.ChangeFrequency(698)
+    time.sleep(0.15)
+    p.stop()
+    time.sleep(0.05)
+    p.start(50)
+    p.ChangeFrequency(698)
+    time.sleep(0.15)
+    p.stop()
+    time.sleep(0.25)
+    p.start(50)
+    p.ChangeFrequency(630)
+    time.sleep(0.5)
+    p.stop()
+    time.sleep(0.05)
+    p.start(50)
+    p.ChangeFrequency(784)
+    time.sleep(0.5)
+    p.stop()
+    time.sleep(0.05)
+    p.start(50)
+    p.ChangeFrequency(698)
+    time.sleep(1)
+
+    p.stop()
+    GPIO.cleanup()
 
 
 def main():
