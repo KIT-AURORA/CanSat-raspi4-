@@ -591,6 +591,8 @@ def main():
     left_motor.forward(1)
     time.sleep(5)
     print("start")
+    right_motor.stop()
+    left_motor.stop()
     time.sleep(2)
     gps_navigartion()
     logging.info("start image_navigation.")
