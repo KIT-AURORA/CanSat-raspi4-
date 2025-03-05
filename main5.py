@@ -50,8 +50,6 @@ ACC_ADDRESS = 0x19
 MAG_ADDRESS = 0x13
 ACC_REGISTER_ADDRESS = 0x02
 MAG_REGISTER_ADDRESS = 0x42
-# BMX055 設定
-i2c = smbus.SMBus(1)
 # モーター設定
 left_motor = Motor(forward=12, backward=18)
 right_motor = Motor(forward=13, backward=19)
@@ -91,11 +89,23 @@ def init_bmx055():
     BMX055の初期設定を行う関数
     """
     try:
+        i2c = smbus.SMBus(1)
+        time.sleep(0.1)
         i2c.write_byte_data(MAG_ADDRESS, 0x4B, 0x01)
+        i2c = smbus.SMBus(1)
+        time.sleep(0.1)
         i2c.write_byte_data(MAG_ADDRESS, 0x4C, 0x00)
+        i2c = smbus.SMBus(1)
+        time.sleep(0.1)
         i2c.write_byte_data(ACC_ADDRESS, 0x0F, 0x03)  # 加速度範囲の設定
+        i2c = smbus.SMBus(1)
+        time.sleep(0.1)
         i2c.write_byte_data(ACC_ADDRESS, 0x10, 0x08)  # バンド幅の設定
+        i2c = smbus.SMBus(1)
+        time.sleep(0.1)
         i2c.write_byte_data(ACC_ADDRESS, 0x11, 0x00)  # パワーモードの設定
+        i2c = smbus.SMBus(1)
+        time.sleep(0.1)
         logging.info("BMX055 initialized successfully")
 
     except IOError as e:
@@ -192,7 +202,6 @@ def calculate_heading(x, y):
     """
     引数は地磁気x,y.CanSatの向いている方位を示す。
     """
-    global last_log_time_heading
     initial_heading = math.atan2(y, x) * (180 / math.pi)
     compass_heading = (initial_heading - 90) % 360
     return compass_heading
