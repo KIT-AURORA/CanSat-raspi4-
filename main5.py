@@ -431,24 +431,24 @@ def get_image_bounds(map_number):
     """衛星画像の境界座標を返す"""
     if map_number == "A":
         return {
-            "left": 130.9586962,
-            "right": 130.9617144,
-            "top": 30.3767382,
-            "bottom": 30.3734562,
+            "left": 130.9586513,
+            "right": 130.9619501,
+            "top": 30.3750718,
+            "bottom": 30.3738572,
         }
     if map_number == "B":
         return {
-            "left": 130.9593493,
-            "right": 130.9621559,
-            "top": 30.3767382,
-            "bottom": 330.3750542,
+            "left": 130.9591472,
+            "right": 130.9621331,
+            "top": 30.3764735,
+            "bottom": 30.3752873,
         }
     if map_number == "AB":
         return {
-            "left": 130.9584699,
-            "right": 130.9642903,
-            "top": 30.3768617,
-            "bottom": 30.3735816,
+            "left": 130.9580894,
+            "right": 130.964819,
+            "top": 30.3767301,
+            "bottom": 30.3735576,
         }
 
 
@@ -515,7 +515,7 @@ def separation():
             continue
         acc = calculate_acc(acc_x, acc_y, acc_z)
         print(acc)
-        if -0.5 < acc < 0.5:
+        if -1 < acc < 1:
             if start_time is None:
                 start_time = time.time()
             elif time.time() - start_time >= stable_time:
