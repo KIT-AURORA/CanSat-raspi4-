@@ -38,7 +38,6 @@ if map_number == "AB":
     background_image_path = "/home/Keito1091/background_imageAB.png"
 # ！！！！！！！！！！！！直前に確認！！！！！！！！！！！
 
-
 # サーボ設定
 servo_pin = 17
 pi = pigpio.pi()  # pigpioを初期化
@@ -80,9 +79,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
-
 last_log_time = 0
-
 i2c = smbus.SMBus(1)
 
 
@@ -513,7 +510,7 @@ def separation():
     while True:
         elapsed_time = time.time() - start_time_sub  # 経過時間を計算
         if elapsed_time > 20:  # 20秒分離しなかったら強制分離
-            logging.info("Landed. stopping Cansat. ")
+            logging.info("Landed. forced separation ")
             print("着地判定: CanSatを強制分離しました。")
             break
 
