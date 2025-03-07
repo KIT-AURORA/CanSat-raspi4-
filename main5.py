@@ -507,9 +507,16 @@ def create_map(coordinates, background_image_path):
 
 
 def separation():
+    start_time_sub = time.time()
     start_time = None
     stable_time = 5  # 静止時間
     while True:
+        elapsed_time = time.time() - start_time_sub  # 経過時間を計算
+        if elapsed_time > 20:  # 20秒分離しなかったら強制分離
+            logging.info("Landed. stopping Cansat. ")
+            print("着地判定: CanSatを強制分離しました。")
+            break
+
         acc_x, acc_y, acc_z = get_bmx055_accel_data()
         if acc_x is None or acc_y is None or acc_z is None:
             continue
