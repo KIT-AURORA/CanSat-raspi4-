@@ -350,7 +350,7 @@ def image_navigartion():
         start_time = time.time()
         while True:
             elapsed_time = time.time() - start_time  # 経過時間を計算
-            if elapsed_time > 30:  # 30秒経過したら停止
+            if elapsed_time > 120:  # 30秒経過したら停止
                 right_motor.stop()
                 left_motor.stop()
                 logging.info("Arrival. Stop")
