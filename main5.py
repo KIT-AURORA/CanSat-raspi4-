@@ -616,7 +616,7 @@ def main():
         create_map(gps_coordinates, background_image_path)
     left_motor.stop()
     right_motor.stop()
-    logging.info("finish.")
+    logging.info("Goal.finish.")
     print("終了")
 
 
