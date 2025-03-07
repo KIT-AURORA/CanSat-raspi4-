@@ -526,7 +526,7 @@ def separation():
             start_time = None
         time.sleep(0.1)
     set_angle(5)  # 解除
-    logging.info("comleted separation. start navigation.")
+    logging.info("completed separation. start navigation.")
     print("分離完了。走行開始")
 
 
