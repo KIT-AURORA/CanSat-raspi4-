@@ -224,7 +224,7 @@ def control_motors(target_bearing, current_heading):
     方位の誤差をもとにPID制御でモーターの値を返す
     """
     Kp = 0.0055  # 比例制御。
-    Ki = 0  # 積分制御。
+    Ki = 0.001  # 積分制御。
     Kd = 0  # 微分制御。
 
     error = target_bearing - current_heading
@@ -589,7 +589,16 @@ def main():
     time.sleep(1)
     right_motor.forward(1)
     left_motor.forward(1)
-    time.sleep(5)
+    time.sleep(4)
+    right_motor.stop()
+    left_motor.stop()
+    time.sleep(4)
+    right_motor.forward(1)
+    left_motor.forward(1)
+    time.sleep(4)
+    right_motor.stop()
+    left_motor.stop()
+    time.sleep(2)
     print("start")
     right_motor.stop()
     left_motor.stop()
