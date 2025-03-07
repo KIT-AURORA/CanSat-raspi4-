@@ -386,11 +386,11 @@ def image_navigartion():
                 ):
                     if ball_location[1] > (center_image_x + (image_width / 4)):
                         right_motor.forward(0.4)
-                        left_motor.backward(0)
+                        left_motor.stop()
                         logging.info("turn left")
                         print("左折")
                     elif ball_location[1] < (center_image_x - (image_width / 4)):
-                        right_motor.backward(0)
+                        right_motor.stop()
                         left_motor.forward(0.4)
                         logging.info("turn right")
                         print("右折")
@@ -401,7 +401,7 @@ def image_navigartion():
                         print("前進")
                 elif ball_location[0] < minimum_area:
                     right_motor.forward(0.4)
-                    left_motor.forward(0)
+                    left_motor.stop()
                     logging.info("Not detected, searching.")
                     print("ターゲット未検知, 捜索します")
                 else:
@@ -413,7 +413,7 @@ def image_navigartion():
                     break
             else:
                 right_motor.backward(0.4)
-                left_motor.forward(0)
+                left_motor.stop()
                 logging.info("Not detected.")
                 print("ターゲットが見つかりません")
     except KeyboardInterrupt:
