@@ -223,7 +223,7 @@ def control_motors(target_bearing, current_heading):
     """
     方位の誤差をもとにPID制御でモーターの値を返す
     """
-    Kp = 0.0045  # 比例制御。(0.0055)
+    Kp = 0.0055  # 比例制御。
     Ki = 0  # 積分制御。
     Kd = 0  # 微分制御。
 
@@ -258,7 +258,7 @@ def calibrate_magnetometer_with_rotation():
     x_min = y_min = z_min = 1000000
     x_max = y_max = z_max = -1000000
     start_time = time.time()
-    rotation_speed = 0.3
+    rotation_speed = 0.6
     left_motor.value = rotation_speed
     right_motor.value = -rotation_speed
     try:
