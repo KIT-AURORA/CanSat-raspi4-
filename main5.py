@@ -412,7 +412,7 @@ def image_navigartion():
                     goalsound()
                     break
             else:
-                right_motor.backward(0.4)
+                right_motor.forward(0.4)
                 left_motor.stop()
                 logging.info("Not detected.")
                 print("ターゲットが見つかりません")
