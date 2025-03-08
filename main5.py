@@ -22,8 +22,8 @@ import logging
 # 本番前　ログを削除（rm Navigartion.log）
 # 現在、画像処理のループ120秒,強制分離時間20秒
 # ゴール座標
-TARGET_LAT = 33.890006666666665  # 緯度
-TARGET_LON = 130.83991666666665  # 経度
+TARGET_LAT = 30.3741702  # 緯度
+TARGET_LON = 130.9600508  # 経度
 # 背景map画像
 map_number = "A"
 # 画像認識設定
@@ -348,7 +348,7 @@ def image_navigartion():
         start_time = time.time()
         while True:
             elapsed_time = time.time() - start_time  # 経過時間を計算
-            if elapsed_time > 120:  # 30秒経過したら停止
+            if elapsed_time > 90:  # 90秒経過したら停止
                 right_motor.stop()
                 left_motor.stop()
                 logging.info("Arrival. Stop")
